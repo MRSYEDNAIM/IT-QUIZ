@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz after Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #quiz {
+            display: none; /* Hide quiz initially */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Quiz</h1>
+    <video id="video" width="640" height="360" controls>
+        <source src="C:\Users\Lenovo\Downloads\SPIDERMAN IN KARACHI.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div id="quiz">
+        <h2>Quiz Time!</h2>
+        <form id="quizForm">
+            <p>1. What is the capital of France?</p>
+            <input type="radio" name="q1" value="a"> A) Berlin<br>
+            <input type="radio" name="q1" value="b"> B) Paris<br>
+            <input type="radio" name="q1" value="c"> C) Rome<br>
+
+            <p>2. What is 2 + 2?</p>
+            <input type="radio" name="q2" value="a"> A) 3<br>
+            <input type="radio" name="q2" value="b"> B) 4<br>
+            <input type="radio" name="q2" value="c"> C) 5<br>
+
+            <button type="submit">Submit Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const quiz = document.getElementById('quiz');
+
+        video.onended = function() {
+            quiz.style.display = 'block'; // Show quiz when video ends
+        };
+
+        document.getElementById('quizForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent form submission
+            const answers = {
+                q1: 'b', // Correct answer for question 1
+                q2: 'b'  // Correct answer for question 2
+            };
+            let score = 0;
+
+            if (document.querySelector('input[name="q1"]:checked')?.value === answers.q1) {
+                score++;
+            }
+            if (document.querySelector('input[name="q2"]:checked')?.value === answers.q2) {
+                score++;
+            }
+
+            alert(`You scored ${score} out of 2!`); // Display score
+        };
+    </script>
+
+</body>
+</html>
